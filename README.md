@@ -2,20 +2,18 @@
 # NFL Sports Alerts System
 
 ## **Project Overview**
-This project is an alert system that sends real-time NBA game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NBA APIs** to provide sports fans with up-to-date game information. The project demonstrates cloud computing principles and efficient notification mechanisms.
+This project is an alert system that sends real-time NFL game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NFL APIs** to provide sports fans with up-to-date game information. The project demonstrates cloud computing principles and efficient notification mechanisms.  
 
 ---
 
 ## **Features**
-- Fetches live NBA game scores using an external API.
+- Fetches live NFL game scores, game status and stadium played using an external API.
 - Sends formatted score updates to subscribers via SMS/Email using Amazon SNS.
 - Scheduled automation for regular updates using Amazon EventBridge.
-- Designed with security in mind, following the principle of least privilege for IAM roles.
+-Security is a priority for all cloud based projects with least privileges assigned
 
 ## **Prerequisites**
 - Free account with subscription and API Key at [sportsdata.io](https://sportsdata.io/)
-- Personal AWS account with basic understanding of AWS and Python
-
 ---
 
 ## **Technical Architecture**
@@ -38,7 +36,7 @@ This project is an alert system that sends real-time NBA game day score notifica
 ```bash
 game-day-notifications/
 ├── src/
-│   ├── gd_notifications.py          # Main Lambda function code
+│   ├── gameday_notifications.py          # Main Lambda function code
 ├── policies/
 │   ├── gameday_sns_policy.json           # SNS publishing permissions
 │   ├── gameday_eventbridge_policy.json   # EventBridge to Lambda permissions
@@ -47,7 +45,8 @@ game-day-notifications/
 └── README.md                        # Project documentation
 ```
 
-## **Setup Instructions**
+Setup Instructions
+This guide will walk you through setting up a notification system using AWS Lambda, SNS, and EventBridge, integrated with an external API. You'll learn how to deploy the Lambda function, configure AWS services, and ensure secure and automated operations.
 
 ### **Create an SNS Topic**
 1. Open the AWS Management Console.
@@ -129,6 +128,12 @@ game-day-notifications/
 
 <img width="329" alt="Screenshot 2025-01-09 at 10 44 23 PM" src="https://github.com/user-attachments/assets/822a4ae1-9697-4863-97d4-055414c07864" />
 
+Cleanup (Optional)
+If you no longer need the system, delete the resources to avoid unnecessary costs:
+
+-Delete the Lambda function.
+-Delete the SNS topic and its subscriptions.
+-Delete the EventBridge rule.
 
 ### **What We Learned**
 1. Combined SNS with Lambda to create an effective event-driven system.
