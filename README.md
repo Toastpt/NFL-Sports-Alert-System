@@ -40,20 +40,14 @@ game-day-notifications/
 ├── src/
 │   ├── gd_notifications.py          # Main Lambda function code
 ├── policies/
-│   ├── gb_sns_policy.json           # SNS publishing permissions
-│   ├── gd_eventbridge_policy.json   # EventBridge to Lambda permissions
-│   └── gd_lambda_policy.json        # Lambda execution role permissions
+│   ├── gameday_sns_policy.json           # SNS publishing permissions
+│   ├── gameday_eventbridge_policy.json   # EventBridge to Lambda permissions
+│   └── gameday_lambda_policy.json        # Lambda execution role permissions
 ├── .gitignore
 └── README.md                        # Project documentation
 ```
 
 ## **Setup Instructions**
-
-### **Clone the Repository**
-```bash
-git clone https://github.com/ifeanyiro9/game-day-notifications.git
-cd game-day-notifications
-```
 
 ### **Create an SNS Topic**
 1. Open the AWS Management Console.
@@ -82,7 +76,7 @@ cd game-day-notifications
 ### **Create the SNS Publish Policy**
 1. Open the IAM service in the AWS Management Console.
 2. Navigate to Policies → Create Policy.
-3. Click JSON and paste the JSON policy from gd_sns_policy.json file
+3. Click JSON and paste the JSON policy from gameday_sns_policy.json file
 4. Replace REGION and ACCOUNT_ID with your AWS region and account ID.
 5. Click Next: Tags (you can skip adding tags).
 6. Click Next: Review.
@@ -98,7 +92,7 @@ cd game-day-notifications
 - Lambda Basic Execution Role (AWSLambdaBasicExecutionRole) (an AWS managed policy).
 5. Click Next: Tags (you can skip adding tags).
 6. Click Next: Review.
-7. Enter a name for the role (e.g., gd_role).
+7. Enter a name for the role (e.g., gameday_role).
 8. Review and click Create Role.
 9. Copy and save the ARN of the role for use in the Lambda function.
 
@@ -108,12 +102,11 @@ cd game-day-notifications
 3. Select Author from Scratch.
 4. Enter a function name (e.g., gd_notifications).
 5. Choose Python 3.x as the runtime.
-6. Assign the IAM role created earlier (gd_role) to the function.
+6. Assign the IAM role created earlier (gameday_role) to the function.
 7. Under the Function Code section:
-- Copy the content of the src/gd_notifications.py file from the repository.
-- Paste it into the inline code editor.
+- Input Python code in the inline editor.
 8. Under the Environment Variables section, add the following:
-- NBA_API_KEY: your NBA API key.
+- NFL_API_KEY: your NFL API key.
 - SNS_TOPIC_ARN: the ARN of the SNS topic created earlier.
 9. Click Create Function.
 
@@ -122,8 +115,10 @@ cd game-day-notifications
 1. Navigate to the Eventbridge service in the AWS Management Console.
 2. Go to Rules → Create Rule.
 3. Select Event Source: Schedule.
-4. Set the cron schedule for when you want updates (e.g., hourly).
-5. Under Targets, select the Lambda function (gd_notifications) and save the rule.
+4. Set the cron schedule for when you want updates (e.g., hourly). I chose to monitor Sunday, Thursday and Saturday games
+5. Under Targets, select the Lambda function (gameday_notifications) and save the rule.
+
+![Screenshot 2025-01-09 at 10 58 45 PM](https://github.com/user-attachments/assets/c540a2a1-cc88-468a-b5c4-722f3be1b316)
 
 
 ### **Test the System**
@@ -132,15 +127,17 @@ cd game-day-notifications
 3. Run the function and check CloudWatch Logs for errors.
 4. Verify that SMS notifications are sent to the subscribed users.
 
+<img width="329" alt="Screenshot 2025-01-09 at 10 44 23 PM" src="https://github.com/user-attachments/assets/822a4ae1-9697-4863-97d4-055414c07864" />
+
 
 ### **What We Learned**
-1. Designing a notification system with AWS SNS and Lambda.
-2. Securing AWS services with least privilege IAM policies.
-3. Automating workflows using EventBridge.
+1. Combined SNS with Lambda to create an effective event-driven system.
+2. Followed the principle of least privilege by granting minimal permissions required for Lambda to access SNS and other AWS services.
+3. By combining EventBridge with Lambda, we created a fully automated, serverless workflow.
 4. Integrating external APIs into cloud-based workflows.
 
 
 ### **Future Enhancements**
-1. Add NFL score alerts for extended functionality.
-2. Store user preferences (teams, game types) in DynamoDB for personalized alerts.
-3. Implement a web UI
+1. Implement an interactive visual interface
+2. Track multiple games amongst different sports
+3. Implement system amongst other industries
