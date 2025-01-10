@@ -1,3 +1,4 @@
+
 # NBA Game Day Notifications / Sports Alerts System
 
 ## **Project Overview**
@@ -18,8 +19,7 @@ This project is an alert system that sends real-time NBA game day score notifica
 ---
 
 ## **Technical Architecture**
-![nba_API](https://github.com/user-attachments/assets/5e19635e-0685-4c07-9601-330f7d1231f9)
-
+![Sports Notification](https://github.com/user-attachments/assets/d7a1f1b3-d426-4a1b-b69a-a525fa1ae726)
 
 ---
 
