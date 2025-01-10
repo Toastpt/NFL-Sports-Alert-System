@@ -99,7 +99,7 @@ This guide will walk you through setting up a notification system using AWS Lamb
 1. Open the AWS Management Console and navigate to the Lambda service.
 2. Click Create Function.
 3. Select Author from Scratch.
-4. Enter a function name (e.g., gd_notifications).
+4. Enter a function name (e.g., gameday_notifications).
 5. Choose Python 3.x as the runtime.
 6. Assign the IAM role created earlier (gameday_role) to the function.
 7. Under the Function Code section:
@@ -135,11 +135,12 @@ If you no longer need the system, delete the resources to avoid unnecessary cost
 -Delete the SNS topic and its subscriptions.
 -Delete the EventBridge rule.
 
-### **What We Learned**
+### **Lessons learned**
 1. Combined SNS with Lambda to create an effective event-driven system.
 2. Followed the principle of least privilege by granting minimal permissions required for Lambda to access SNS and other AWS services.
 3. By combining EventBridge with Lambda, we created a fully automated, serverless workflow.
 4. Integrating external APIs into cloud-based workflows.
+5. Improved error handling by differentiating SNS publishing errors
 
 
 ### **Future Enhancements**
